@@ -1,4 +1,4 @@
-name: vocationcompass
+name: opiniondynamics
 channels:
   - conda-forge
   - defaults
