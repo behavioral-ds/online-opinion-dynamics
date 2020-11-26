@@ -4,7 +4,7 @@ specPal_T2 = c(specPal[2], specPal[6], specPal[7], specPal[4], specPal[8], specP
 specPal_T14 = c(specPal[6], specPal[2], specPal[4], specPal[9], specPal[1], specPal[3], specPal[10], specPal[8], specPal[7], specPal[5])
 
 ## create the intermediaty features vector
-dir.create(path = "Data/feature-sets-NEW/", recursive = T, showWarnings = F)
+dir.create(path = "Data/feature-sets/", recursive = T, showWarnings = F)
 dir.create(path = "Python/RunClassifiers/feature-sets/", recursive = T, showWarnings = F)
 
 # Initializing Data
