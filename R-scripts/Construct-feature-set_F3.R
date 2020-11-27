@@ -94,10 +94,6 @@ for(i in 1 : dim(T_agg_1)[1]){
 T_agg_1$nr_of_posts = NULL
 T_agg_1$labels = NULL
 
-## the distributions don't seem to match...
-hist(T_agg_1$NextLabel)
-hist(train$NextLabel)
-
 ## write down training dataset
 write.csv(T_agg_1, "Data/feature-sets/F3_improved_data.csv")
 # write.csv(T_agg_1, "Python/RunClassifiers/feature-sets/F3_improved_data.csv")

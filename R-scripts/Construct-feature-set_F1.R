@@ -4,14 +4,9 @@ source("R-scripts/utils.R")
 ## load the stance predictor trained on Twitter -- note that you need quanteda v 1.4.3
 ## load the user classifier, it will be used in "utils.R::getPredictions"
 # nb_big_nohash <<- readRDS("Data/correct_model_no_hashtags.rds")
-# nb_big_nohash <- readRDS("Data/nb_with_hashtags_july.rds")
 
 ## read the data.frame containing all the data
-# tic()
 reddit <- readRedditData()
-# ## WARNING: this will take a lot of time (45 minutes on Donald machine)
-# brexit <- buildTree(reddit = reddit)
-# toc()
 
 ## add the number of direct comments which were not written by my author
 res <- mclapply(X = reddit$Entry.ID, FUN = function(entry){
