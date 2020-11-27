@@ -96,17 +96,7 @@ for(i in 1 : dim(T_agg_1)[1]){
 T_agg_1$nr_of_posts = NULL
 T_agg_1$labels = NULL
 
-## the distributions don't seem to match...
-hist(T_agg_1$NextLabel)
-hist(train$NextLabel)
-
-## extract the training part (no NextLabel column)
-## MAR: I'm not convinced, as the Python code requires the current feature.
-# unq_train <- T_agg_1 %>%
-  # select(-NextLabel)
-unq_train <- T_agg_1
-
 ## write down training dataset
-write.csv(unq_train, "Data/feature-sets/F1_improved_data.csv")
-write.csv(unq_train, "Python/RunClassifiers/feature-sets/F1_improved_data.csv")
+write.csv(T_agg_1, "Data/feature-sets/F1_improved_data.csv")
+# write.csv(T_agg_1, "Python/RunClassifiers/feature-sets/F1_improved_data.csv")
 

@@ -29,12 +29,10 @@ submissions$pA <- submissions$All.Comments.A / submissions$TC
 submissions$pB <- submissions$All.Comments.B / submissions$TC
 submissions$pN <- submissions$All.Comments.N / submissions$TC
 
-colnames(train) = c("A1", "A2", "A3", "A4", "A5","B1", "B2", "B3", "B4", "B5", "N1", "N2", "N3", "N4", "N5", "CurrentLabel", "NextLabel")
-
 train <- rbindlist(mclapply(X = 2:max(reddit$period)-1, FUN = function(p){
   print(paste("Period", p))
   
-  ## get stance prediciton at this period and the next
+  ## get stance prediction at this period and the next
   T_next <- reddit %>%
     filter(period == p+1)
   
@@ -68,6 +66,8 @@ train <- rbindlist(mclapply(X = 2:max(reddit$period)-1, FUN = function(p){
   
 }, mc.preschedule = T, mc.cores = min(max(reddit$period)-1, detectCores())))
 
+# colnames(train) = c("A1", "A2", "A3", "A4", "A5","B1", "B2", "B3", "B4", "B5", "N1", "N2", "N3", "N4", "N5", "CurrentLabel", "NextLabel")
+
 saveRDS(train, file = "Data/feature-sets/F3_improved_data.rds", compress = "xz")
 
 ###########################################
@@ -98,12 +98,6 @@ T_agg_1$labels = NULL
 hist(T_agg_1$NextLabel)
 hist(train$NextLabel)
 
-## extract the training part (no NextLabel column)
-## MAR: I'm not convinced, as the Python code requires the current feature.
-# unq_train <- T_agg_1 %>%
-# select(-NextLabel)
-unq_train <- T_agg_1
-
 ## write down training dataset
-write.csv(unq_train, "Data/feature-sets/F3_improved_data.csv")
-write.csv(unq_train, "Python/RunClassifiers/feature-sets/F3_improved_data.csv")
+write.csv(T_agg_1, "Data/feature-sets/F3_improved_data.csv")
+# write.csv(T_agg_1, "Python/RunClassifiers/feature-sets/F3_improved_data.csv")
