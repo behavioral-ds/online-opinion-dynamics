@@ -1,0 +1,23 @@
+%!TEX root = maincl.tex
+%
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[htp]
+	\centering
+	\caption{The volume of users in the testing set for each category of transitions.}
+	\label{tab:volume_users}
+	\begin{tabular}{ccc}
+	\toprule
+	\textbf{\begin{tabular}[c]{@{}c@{}}Current\\ Stance\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Following\\ Stance\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Number of\\ Users\end{tabular}} \\ \midrule
+{\color[HTML]{FE0000} Against}                                    & {\color[HTML]{FE0000} Against}                                      & 158                                                                \\ 
+{\color[HTML]{FE0000} Against}                                    & {\color[HTML]{3166FF} Brexit}                                       & 33                                                                 \\ 
+{\color[HTML]{FE0000} Against}                                    & {\color[HTML]{656565} Neutral}                                      & 371                                                                \\
+{\color[HTML]{3166FF} Brexit}                                     & {\color[HTML]{FE0000} Against}                                      & 35                                                                 \\ 
+{\color[HTML]{3166FF} Brexit}                                     & {\color[HTML]{3166FF} Brexit}                                       & 60                                                                 \\
+{\color[HTML]{3166FF} Brexit}                                     & {\color[HTML]{656565} Neutral}                                      & 332                                                                \\ 
+{\color[HTML]{656565} Neutral}                                    & {\color[HTML]{FE0000} Against}                                      & 387                                                                \\ 
+{\color[HTML]{656565} Neutral}                                    & {\color[HTML]{3166FF} Brexit}                                       & 350                                                                \\ 
+{\color[HTML]{656565} Neutral}                                    & {\color[HTML]{656565} Neutral}                                      & 27                                                                 \\ \bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,68 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[tbp]
+	\newcommand\mywidth{5.5cm}
+	\centering
+	\caption{Most frequent terms used in each cluster in periods 2 and 14.}
+	\label{fig:table_terms}
+%	\resizebox{.49\textwidth}{!}{%
+	\small
+	\begin{tabular}{|c|p{\mywidth}|p{\mywidth}|}
+	%\begin{tabular}{|c|l|l|{\mywidth}}
+	\hline
+	\multicolumn{1}{|l|}{\textbf{Cluster}} & \multicolumn{1}{c|}{\textbf{Period 2}}                                                                              & \multicolumn{1}{c|}{\textbf{Period 14}}                                                                                           	\\ \hline
+
+	\cellcolor[HTML]{F8766D}\textbf{1}   
+    & \textit{trade, deal, market, agreement, free, work, negotiate}                  
+    & \textit{leave, make, point, way, see, reason}                                                                                     	\\ \hline
+
+	\cellcolor[HTML]{D89000}\textbf{2}     
+	& \textit{germany, europe, greece, france, union}                                                                            
+	& \textit{parliament, withdraw, extension, may, deal, article, agreement, vote, european} 
+	\\ \hline
+
+	\cellcolor[HTML]{A3A500}\textbf{3}     
+	& \textit{leaver, referendum, cameron, boris, campaign, article}                   
+	& \textit{government, work, money, pay, business}                                                                                   
+	\\ \hline
+
+	\cellcolor[HTML]{39B600}\textbf{4}     
+	& \textit{see, way, reality, leave, country}                                                                                 
+	& \textit{f*ck, country, need, right, s*it, much}                                                                                   
+	\\ \hline
+
+	\cellcolor[HTML]{00BF7D}\textbf{5}     
+	& \textit{referendum, democracy, parliament, government, vote, majority, decision} 
+	& \textit{petition, sign, remain, signature, million, article, email, vote}               
+	\\ \hline
+
+
+	\cellcolor[HTML]{00BFC4}\textbf{6}     
+	& \textit{immigrants, f*ck, work, live, racist, job, education}                    
+	& \textit{country, state, govern, power, nation, european, member, law, manifestation}    
+	\\ \hline
+
+	\cellcolor[HTML]{00B0F6}\textbf{7}     
+	& \textit{country, leave, work, problem, manifestation}                           
+	& \textit{border, ireland, deal, leave, custom, trade, northern irish}                    
+	\\ \hline
+
+	\cellcolor[HTML]{9590FF}\textbf{8}     
+	& \textit{leave, remain, make, research, argument, based, interest}                
+	& \textit{referendum, leave, result, democracy, second, vote, election, change}           
+	\\ \hline
+
+	\cellcolor[HTML]{E76BF3}\textbf{9}     
+	& \textit{european, union, british, leave, nation, way, right}                     
+	& \textit{may, british, britain, million, theresa, tori, minister, london, political}     
+	\\ \hline
+
+	\cellcolor[HTML]{FF62BC}\textbf{10}    
+	& \textit{pound, economy bank, market, value, currency, price, drop, money}        
+	& \textit{deal, may, option, vote, mps, negotiation, party, parliament, option}           
+	\\ \hline
+\end{tabular}%
+%}
+\end{table}

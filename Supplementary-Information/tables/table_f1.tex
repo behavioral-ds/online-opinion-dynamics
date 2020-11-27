@@ -1,0 +1,17 @@
+%!TEX root = maincl.tex
+%
+\begin{table}[tbp]
+	\centering
+	\caption{F1 score per initial stance and per predicted stance.}
+%	\TODO{MAR}{Build this for textual features.}
+	\label{fig:table_f1_scores}
+	\begin{tabular}{l|ccc}
+		\toprule
+		\backslashbox{\textit{Stance at t}}{\textit{Stance at t+1}}
+		&\textbf{Against} & \textbf{Neutral} & \textbf{Brexit}\\ \midrule
+		\textbf{Against} &0.68&0.34&0.35\\
+		\textbf{Neutral} &0.51&0.62&0.45\\
+		\textbf{Brexit} &0.44&0.34&0.59\\ \bottomrule
+\end{tabular}
+\end{table}
+
