@@ -3,3 +3,39 @@
 .RData
 .Ruserdata
 *.rds
+
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+*.bak
+
+# PDF output - usually a bad idea to keep this in Git
+acm.pdf
+
+*.fls
+# Latexmk
+*.fdb_latexmk
+
+# SyncTeX
+*.synctex.gz
+
+# LaTeX Beamer
+*.snm
+*.vrb
+*.nav
+*.out
+
+# BibTeX
+*.bbl
+*.blg
+
+# Sublime Text Project Files (usually contain absolute paths)
+*.sublime-project
+*.sublime-workspace
+/ijcai19.pdf
+/acm.xcp
+/IEEE BigData 2019 paper.pdf
+/main.pdf
+*.cut
+/mainIDA.pdf

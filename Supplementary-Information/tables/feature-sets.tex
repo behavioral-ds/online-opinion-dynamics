@@ -1,0 +1,39 @@
+%!TEX root = maincl.tex
+%
+\begin{table}[tbp]
+	\small
+	\newcommand\widthcellone{4cm} %% full size: 0.173
+	\newcommand\widthcelltwo{8cm} %% full size: 0.173
+	\renewcommand\cellgape{\Gape[2pt]}
+	\centering
+	\caption{Constructed feature sets describing user interactions with information diffusions.}
+	\label{tab:constructed-features}
+	\begin{tabular}{p{\widthcellone}p{\widthcelltwo}}
+		\toprule
+		\textbf{Feature set} & \textbf{Features} \\ \midrule
+		\makecell[t{p{\widthcellone}}]{\textbf{FS1}\\(User activity)} & \makecell[t{p{\widthcelltwo}}]{
+			-- number of initiated diffusions $ID_t(u)$ \\
+			-- number of submitted comments $CS_t(u)$\\
+			-- number of received comments per entry $R_t^1(u),...,R_t^5(u)$\\
+			-- stance at current time-frame $c_t(u)$.} \\ 
+			
+	\makecell[t{p{\widthcellone}}]{\textbf{FS2}\\(User activity per group)} & \makecell[t{p{\widthcelltwo}}]{
+			-- number of comments submitted to entries from each group $CS_t^A(u), CS_t^P(u), CS_t^N(u)$\\
+			-- number of received comments per entry, tallied by commentator stance $R_t^{x1}(u),..., R_t^{x5}(u)$,  $x \in \{A, P, N\}$\\
+			-- stance at current time-frame $c_t(u)$\\
+			}\\ 
+			
+		\makecell[t{p{\widthcellone}}]{\textbf{FS3}\\(Structure of diffusion)} & \makecell[t{p{\widthcelltwo}}]{
+			-- number of submitted comments in diffusions per group \	$UP_t^{x1}(u), ..., UP_t^{x5}(u)$, $x \in \{A, P, N\}$\\
+			-- stance at current time-frame $c_t(u)$}\\
+			
+			
+		\textbf{FS4} (Relational features) & FS1 + FS2 + FS3 \\
+	
+		\textbf{FS0} (Textual features) & 100 top words + $c_t(u)$ \\
+		
+		\textbf{FS5} (All features) & FS0 + FS4 \\
+		
+		\bottomrule
+\end{tabular}
+\end{table}
