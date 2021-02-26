@@ -28,7 +28,7 @@ We also provide the following code scripts:
 * `scripts/crawlReddit.py` -- Python script to crawl the `r/brexit` subreddit. Creates the submissions and comments files here above.
 R script that starts from `data/all_users_data.csv.xz`, and builds the profession profiles (stored in the file `data/profession-profiles.csv`);
 * `scripts/construct-feature-set_FX.R` (where X is 0-3) -- R scripts to build the textual description (FS0) and activity descriptors (FS1 to FS3) to predict the future Brexit stance (see paper for details). These scripts generate the files `Data/feature-sets/FX_improved_data.csv` (where X is 0-3), which are the datasets used to train the next stance classifiers.
-* `scripts/library_loader.R` -- R script that to load all required librarie for execution and check their versions.
+* `scripts/library_loader.R` -- R script that to load all required libraries for execution and check their versions.
 * `scripts/utils.R` -- additional functions for reading, writing data and plotting.
 
 
