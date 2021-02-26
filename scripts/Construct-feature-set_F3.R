@@ -1,5 +1,5 @@
-source('R-scripts/library_loader.R')
-source("R-scripts/utils.R")
+source('scripts/library_loader.R')
+source("scripts/utils.R")
 
 ## read the data.frame containing all the data
 reddit <- readRedditData()
@@ -66,8 +66,7 @@ train <- rbindlist(mclapply(X = 2:max(reddit$period)-1, FUN = function(p){
   
 }, mc.preschedule = T, mc.cores = min(max(reddit$period)-1, detectCores())))
 
-# colnames(train) = c("A1", "A2", "A3", "A4", "A5","B1", "B2", "B3", "B4", "B5", "N1", "N2", "N3", "N4", "N5", "CurrentLabel", "NextLabel")
-
+dir.create(path = "Data/feature-sets", showWarnings = F)
 saveRDS(train, file = "Data/feature-sets/F3_improved_data.rds", compress = "xz")
 
 ###########################################
@@ -78,22 +77,19 @@ train$Author <- NULL
 train$Period <- NULL
 
 ## there are identical representations of with different NextLabel
-T_agg = train %>%
+T_agg <- train %>%
   group_by_at(setdiff(names(train), "NextLabel")) %>%
-  summarise(nr_of_posts = n(), labels = paste0(NextLabel, collapse = " "))
-
-T_agg_1 <- T_agg
+  summarise(nr_of_posts = n(), labels = paste0(NextLabel, collapse = " "), .groups = "drop")
 
 ## compute the majority label from the duplicated data
-for(i in 1 : dim(T_agg_1)[1]){
-  test = as.numeric(unlist(regmatches(T_agg_1[i,]$labels, gregexpr("[[:digit:]]+", T_agg_1[i,]$labels))))
-  T_agg_1[i,"NextLabel"] =  as.numeric(names(which.max(table(test))))
+for(i in 1 : dim(T_agg)[1]){
+  test = as.numeric(unlist(regmatches(T_agg[i,]$labels, gregexpr("[[:digit:]]+", T_agg[i,]$labels))))
+  T_agg[i,"NextLabel"] =  as.numeric(names(which.max(table(test))))
 }
 
 ## remove intermediary fields
-T_agg_1$nr_of_posts = NULL
-T_agg_1$labels = NULL
+T_agg$nr_of_posts = NULL
+T_agg$labels = NULL
 
 ## write down training dataset
-write.csv(T_agg_1, "Data/feature-sets/F3_improved_data.csv")
-# write.csv(T_agg_1, "Python/RunClassifiers/feature-sets/F3_improved_data.csv")
+write.csv(T_agg, "Data/feature-sets/F3_improved_data.csv")

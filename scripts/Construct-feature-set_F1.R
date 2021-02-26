@@ -1,5 +1,5 @@
-source('R-scripts/library_loader.R')
-source("R-scripts/utils.R")
+source('scripts/library_loader.R')
+source("scripts/utils.R")
 
 ## load the stance predictor trained on Twitter -- note that you need quanteda v 1.4.3
 ## load the user classifier, it will be used in "utils.R::getPredictions"
@@ -63,6 +63,7 @@ train <- rbindlist(lapply(X = 2:max(reddit$period)-1, FUN = function(p){
   
 }))
 
+dir.create(path = "Data/feature-sets", showWarnings = F)
 saveRDS(train, file = "Data/feature-sets/F1_improved_data.rds", compress = "xz")
 #####################################
 
@@ -73,25 +74,20 @@ train$Author <- NULL
 train$Period <- NULL
 
 ## there are identical representations of with different NextLabel
-T_agg = train %>%
+T_agg <- train %>%
   group_by_at(setdiff(names(train), "NextLabel")) %>%
-  summarise(nr_of_posts = n(), labels = paste0(NextLabel, collapse = " "))
-
-## this is dodgy. Why remove the "2", "2 2" and "2 2 2" ?
-# T_agg_1 = T_agg[T_agg$CurrentLabel != 2 | (T_agg$labels != "2" & T_agg$labels != "2 2"& T_agg$labels != "2 2 2"),]
-T_agg_1 <- T_agg
+  summarise(nr_of_posts = n(), labels = paste0(NextLabel, collapse = " "), .groups = "drop")
 
 ## compute the majority label from the duplicated data
-for(i in 1 : dim(T_agg_1)[1]){
-  test = as.numeric(unlist(regmatches(T_agg_1[i,]$labels, gregexpr("[[:digit:]]+", T_agg_1[i,]$labels))))
-  T_agg_1[i,"NextLabel"] =  as.numeric(names(which.max(table(test))))
+for(i in 1 : dim(T_agg)[1]){
+  test = as.numeric(unlist(regmatches(T_agg[i,]$labels, gregexpr("[[:digit:]]+", T_agg[i,]$labels))))
+  T_agg[i,"NextLabel"] =  as.numeric(names(which.max(table(test))))
 }
 
 ## remove intermediary fields
-T_agg_1$nr_of_posts = NULL
-T_agg_1$labels = NULL
+T_agg$nr_of_posts = NULL
+T_agg$labels = NULL
 
 ## write down training dataset
-write.csv(T_agg_1, "Data/feature-sets/F1_improved_data.csv")
-# write.csv(T_agg_1, "Python/RunClassifiers/feature-sets/F1_improved_data.csv")
+write.csv(T_agg, "Data/feature-sets/F1_improved_data.csv")
 

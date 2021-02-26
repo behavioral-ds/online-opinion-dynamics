@@ -1,5 +1,5 @@
-source('R-scripts/library_loader.R')
-source("R-scripts/utils.R")
+source('scripts/library_loader.R')
+source("scripts/utils.R")
 
 nb_big_nohash <<- readRDS("Data/correct_model_no_hashtags.rds")
 
@@ -9,9 +9,9 @@ if (!file.exists("Data/feature-sets/F0_most_frequent_words.rds")){
   t_all <- initializeData(N = -1, splitt = F)
   tm_ <- unique(as.matrix(getTermMatrixWithTM(t = t_all[1:100000,], time_frame = -1, sparsity = 0.9999999999, tfidf = weightTfIdf)))
   mostFrequentWords = as.character(getOverallMostFrequentWords(tm_)$word)
-  write_rds(x = mostFrequentWords, file = "Data/feature-sets/F0_most_frequent_words.rds")
+  write_rds(x = mostFrequentWords, file = "Data/feature-sets/F0_most_frequent_words.rds", compress = "xz")
 } else {
-  load(file = "Data/feature-sets/F0_most_frequent_words.rds") 
+  mostFrequentWords <- read_rds(file = "Data/feature-sets/F0_most_frequent_words.rds") 
 }
 
 t <- initializeData()
@@ -55,6 +55,8 @@ columns <- colnames(train)
 colnames(train) <- c("Author", paste0("W", 1 : (dim(train)[2] - 4)), "CurrentLabel", "NextLabel", "Period")
 
 dim(unique(train))
+
+dir.create(path = "Data/feature-sets", showWarnings = F)
 saveRDS(train, file = "Data/feature-sets/F0_improved_data.rds", compress = "xz")
 
 #################################################
@@ -65,26 +67,19 @@ train$Author <- NULL
 train$Period <- NULL
 
 ## there are identical representations of with different NextLabel
-T_agg = train %>%
+T_agg <- train %>%
   group_by_at(setdiff(names(train), "NextLabel")) %>%
-  summarise(nr_of_posts = n(), labels = paste0(NextLabel, collapse = " "))
-
-## this is dodgy. Why remove the "2", "2 2" and "2 2 2" ?
-# T_agg_1 = T_agg[T_agg$CurrentLabel != 2 | (T_agg$labels != "2" & T_agg$labels != "2 2"& T_agg$labels != "2 2 2"),]
-T_agg_1 <- T_agg
+  summarise(nr_of_posts = n(), labels = paste0(NextLabel, collapse = " "), .groups = "drop")
 
 ## compute the majority label from the duplicated data
-for(i in 1 : dim(T_agg_1)[1]){
-  test = as.numeric(unlist(regmatches(T_agg_1[i,]$labels, gregexpr("[[:digit:]]+", T_agg_1[i,]$labels))))
-  T_agg_1[i,"NextLabel"] =  as.numeric(names(which.max(table(test))))
+for(i in 1 : dim(T_agg)[1]){
+  test = as.numeric(unlist(regmatches(T_agg[i,]$labels, gregexpr("[[:digit:]]+", T_agg[i,]$labels))))
+  T_agg[i,"NextLabel"] =  as.numeric(names(which.max(table(test))))
 }
 
 ## remove intermediary fields
-T_agg_1$nr_of_posts = NULL
-T_agg_1$labels = NULL
+T_agg$nr_of_posts = NULL
+T_agg$labels = NULL
 
 ## write down training dataset
-write.csv(T_agg_1, "Data/feature-sets/F0_improved_data.csv")
-# write.csv(T_agg_1, "Python/RunClassifiers/feature-sets/F0_improved_data.csv")
-
-
+write.csv(T_agg, "Data/feature-sets/F0_improved_data.csv")
