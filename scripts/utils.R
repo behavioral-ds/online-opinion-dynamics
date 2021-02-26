@@ -5,7 +5,7 @@ specPal_T14 = c(specPal[6], specPal[2], specPal[4], specPal[9], specPal[1], spec
 
 ## create the intermediaty features vector
 dir.create(path = "Data/feature-sets/", recursive = T, showWarnings = F)
-dir.create(path = "Python/RunClassifiers/feature-sets/", recursive = T, showWarnings = F)
+# dir.create(path = "Python/RunClassifiers/feature-sets/", recursive = T, showWarnings = F)
 
 # Initializing Data
 initializeData <- function(N = 15, splitt = T) {
