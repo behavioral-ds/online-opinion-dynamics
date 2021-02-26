@@ -46,7 +46,7 @@ We also provide the following code scripts:
     `Data/feature-sets/FX_improved_data.csv` (where X is 0-3), which are
     the datasets used to train the next stance classifiers.
   - `scripts/library_loader.R` – R script that to load all required
-    librarie for execution and check their versions.
+    libraries for execution and check their versions.
   - `scripts/utils.R` – additional functions for reading, writing data
     and plotting.
 
